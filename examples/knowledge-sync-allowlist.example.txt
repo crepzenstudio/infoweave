@@ -1,0 +1,25 @@
+# InfoWeave knowledge-sync allow-list — EXAMPLE (neutral)
+#
+# If you sync a SUBSET of the workspace between environments, list here exactly
+# what may travel. Default posture is DENY: nothing syncs unless listed below.
+#
+# Rules:
+#   - One path (relative to <workspace-root>) per line.
+#   - Lines starting with '#' are comments.
+#   - A trailing '/' means "this directory and its contents".
+#   - NEVER list anything carrying secrets, raw datasets, or personal/customer data.
+#
+# Safe-to-sync examples (framework + curated knowledge):
+
+AGENTS.md
+knowledge/INDEX.md
+knowledge/
+_system/
+handoffs/INDEX.md
+
+# Deliberately NOT listed (keep local):
+#   memory/                 # operational journals are per-environment
+#   memory/locks/           # lock markers are local coordination only
+#   outputs/                # generated, regenerate per environment
+#   projects/*/data/        # datasets never travel via this list
+#   _system/host-registry.yaml   # machine-specific; each environment has its own

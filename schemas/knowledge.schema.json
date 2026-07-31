@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://infoweave.example/schemas/knowledge.schema.json",
+  "title": "InfoWeave Knowledge Document Frontmatter",
+  "description": "Frontmatter schema for knowledge/ files: top INDEX, category INDEX, SKILL.md, and body notes.",
+  "type": "object",
+  "required": ["id", "type", "version", "status", "last_updated"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "kebab-case, stable, globally unique within the workspace"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["index-top", "index-category", "skill", "knowledge-note"],
+      "description": "Role of this knowledge file"
+    },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "language": { "type": "string", "enum": ["en", "ja", "mixed"] },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "stale", "archived", "confidential"]
+    },
+    "last_updated": { "type": "string", "format": "date" },
+    "size": {
+      "type": "string",
+      "description": "For SKILL.md: approximate body size, e.g. '~8 KB'"
+    },
+    "when_to_load": {
+      "type": "string",
+      "description": "For SKILL.md: a short cue describing when this item is relevant"
+    },
+    "files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "For SKILL.md: the body files this item comprises"
+    },
+    "related": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "superseded_by": { "type": "string" },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    }
+  }
+}

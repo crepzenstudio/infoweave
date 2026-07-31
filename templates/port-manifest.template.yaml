@@ -1,0 +1,56 @@
+# Port Manifest — TEMPLATE (neutral)
+#
+# Describes ONE cross-environment move: what, from/to where, how, and why.
+# Copy to a real file, e.g. port-manifest-<YYYY-MM-DD>_<short>.yaml, then fill in.
+# The framework defines this shape; you provide the actual transport mechanism.
+
+id: port-<YYYY-MM-DD>-<short>
+created: <YYYY-MM-DDTHH:MM:SS+00:00>
+created_by: <agent-id or user>
+status: planned        # planned | approved | in_progress | completed | aborted
+
+intent: |
+  One paragraph: what is being moved and why.
+
+direction:
+  from_env: "<site>"             # source site label
+  from_path: "<source-path>"     # relative to <workspace-root> when possible
+  to_env: "<site>"               # target site label
+  to_path: "<target-path>"
+  via: direct                    # direct | relay   (relay = through the transit hub)
+
+items:
+  - kind: code                   # code | data | model | doc | config
+    src: "<relative-or-abs>"
+    dst: "<relative-or-abs>"
+    size: "~XX MB"
+    data_class: "<class>"        # classify before moving; never move restricted data
+    notes: ""
+
+dependencies:
+  - "<e.g. runtime/version the target needs>"
+  - "<e.g. network path reachable>"
+
+preflight_checks:
+  - "Target dir writable"
+  - "Disk free > 2x payload size"
+  - "Tunnel open (only if via: relay)"
+
+execution_method:
+  tool: "<rsync | scp | shared-mount | tunnel-script>"
+  command_template: |
+    <your transport command, parameterized by the fields above>
+  parallel_safe: true
+
+post_steps:
+  - "Verify file count and checksums"
+  - "Create a receiving handoff in handoffs/"
+  - "Append an entry to memory/work-log/<receiving-site>.md"
+
+rollback_plan: |
+  If something goes wrong, how do we undo it?
+
+approval:
+  required_from: user
+  approved_at: null
+  approved_notes: ""

@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://infoweave.example/schemas/memory.schema.json",
+  "title": "InfoWeave Memory Document Frontmatter",
+  "description": "Frontmatter schema for memory/*.md files (current-focus, decisions, work-log, archive entries).",
+  "type": "object",
+  "required": ["id", "type", "version", "language", "status", "last_updated", "author"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$",
+      "description": "kebab-case unique identifier within memory/"
+    },
+    "type": { "type": "string", "const": "memory" },
+    "subtype": {
+      "type": "string",
+      "enum": ["current-focus", "decisions", "work-log", "archive", "preference"],
+      "description": "Optional finer classification"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of this document's schema usage"
+    },
+    "language": { "type": "string", "enum": ["en", "ja", "mixed"] },
+    "status": { "type": "string", "enum": ["draft", "active", "deprecated", "archived"] },
+    "last_updated": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date (YYYY-MM-DD)"
+    },
+    "author": {
+      "type": "string",
+      "description": "Agent identifier, e.g. '<runtime>@<site>', 'user'"
+    },
+    "line_budget": {
+      "type": "integer",
+      "minimum": 10,
+      "maximum": 500,
+      "description": "Soft cap on body lines. current-focus recommended <= 50. Exceeding triggers archive push-out."
+    },
+    "archived_from": {
+      "type": "string",
+      "description": "If pushed out from another file, the source path"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    }
+  }
+}

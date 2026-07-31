@@ -1,0 +1,32 @@
+# InfoWeave host registry — EXAMPLE (neutral)
+#
+# This is the ONE place machine-specific values live. Scripts read from here;
+# they never hardcode hosts/paths/ids. Copy to _system/host-registry.yaml and edit.
+#
+# IMPORTANT: secrets (tokens, keys, passwords) do NOT belong here. Reference them
+# by name from your platform's secret store instead.
+
+workspace:
+  root: "<workspace-root>"          # e.g. /srv/team/workspace
+  share: "<share-path>"             # optional team exchange folder
+  scratch: "<scratch-path>"         # fast local scratch; not long-term storage
+
+sites:
+  - id: "site-a"                    # label used for memory/work-log/site-a.md
+    role: "primary"                 # primary | outpost | relay | scratch
+    base_path: "<workspace-root>"
+    notes: "main editing location"
+
+  - id: "site-b"
+    role: "outpost"
+    base_path: "<outpost-base-path>"
+    notes: "secondary / remote location"
+
+relay:                              # optional: cross-environment transport
+  enabled: false
+  endpoint: "<relay-host>"          # how detached environments exchange files
+  method: "<file-sync-mechanism>"   # rsync, scp, shared mount, etc.
+
+defaults:
+  language_meta: "en"               # agent-facing metadata language
+  language_user: "<your-language>"  # user-facing prose language
