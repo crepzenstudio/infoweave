@@ -120,14 +120,16 @@ After the workspace is built, **not all files need to stay**. This section tells
 
 When setup is complete, the agent should ask:
 
-> "環境構築が完了しました。本環境に不要なドキュメントファイル群（templates、schemas/examples、docs 等）の扱いを決めてください：
+> "Setup is complete. Please decide what to do with the documentation files that
+> are no longer needed in this environment (templates, schemas/examples, docs, etc.):
 >
-> 1. **削除** — テンプレートや設定ガイドを削除します。環境は最小限になります
-> 2. **Archive に移動** — `archive/setup-kit/` 以下に退避。将来参照可能
-> 3. **Handoff に記録** — `handoffs/YYYY-MM-DD-HHMM_infoweave-setup.md` として成果記録し、元ファイルを削除
-> 4. **そのまま保持** — 全て現状維持。今必要ないが将来参考にするかもしれない
+> 1. **Delete** — Remove templates and setup guides. Keeps the environment minimal.
+> 2. **Move to Archive** — Move them under `archive/setup-kit/` for future reference.
+> 3. **Record as Handoff** — Log the outcome as `handoffs/YYYY-MM-DD-HHMM_infoweave-setup.md`
+>    and delete the originals.
+> 4. **Keep as-is** — Leave everything in place; not needed now but might be useful later.
 >
-> また本 README も参考用です。削除するか Archive に移動しますか？"
+> This README is also for reference only. Should it be deleted or moved to Archive?"
 
 ### If you receive this package from someone else
 

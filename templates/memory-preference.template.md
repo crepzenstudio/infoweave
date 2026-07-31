@@ -16,8 +16,8 @@ author: <agent-id or user>
 - **Metadata files (frontmatter):** English
 
 ## Communication style
-- **Tone:** ですます調 / である調（どちらかを選択）
-- **Verbosity:** concise（簡潔）/ detailed（詳細）
+- **Tone:** Formal / Casual — choose one (e.g. です・ます vs だ・である for Japanese output)
+- **Verbosity:** Concise / Detailed
 
 ## House rules
 <!-- Fill in your preferences. These are personal to this workspace only. -->
