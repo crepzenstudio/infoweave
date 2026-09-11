@@ -1,10 +1,10 @@
 ---
 id: agents-md
 type: authority
-version: 1.0.0
+version: 1.1.0
 language: en
 status: active
-last_updated: 2026-06-17
+last_updated: 2026-09-11
 applies_to: <workspace-name>
 ---
 
@@ -230,12 +230,15 @@ Multiple agents may operate from different sessions/machines simultaneously.
 | Creating new files in `handoffs/` | ✅ |
 | Appending to `memory/decisions.md` | ✅ (append only) |
 | Editing inside one `projects/<x>/` (single owner) | ✅ |
-| Editing `knowledge/INDEX.md`, a category INDEX, or `_system/host-registry.yaml` | ⚠️ Declare a lock in `memory/locks/` first |
+| Editing `knowledge/INDEX.md`, a category INDEX, `memory/current-focus.md`, `handoffs/_latest.md`/`INDEX.md`, or `_system/host-registry.yaml` | ⚠️ Declare a lock in `memory/locks/` first |
 | Editing `AGENTS.md`, or `_system/*` other than `host-registry.yaml` | ❌ Single-session only |
 | Editing the same `projects/<x>/` from multiple agents | ❌ Coordinate via handoff first |
 
-Lock marker: `memory/locks/<resource>.lock`, one line
-`<site>:<agent-id>:<ISO8601>:<purpose>`. Remove when done; >1h old = stale.
+Lock: `mkdir memory/locks/<resource>/` (atomic — this *is* the lock, not a file you
+write-then-hope), then write `holder.txt` inside it, one line:
+`<site>:<agent-id>:<ISO8601>:<purpose>`. Remove the whole directory when done
+(`rm -rf`, not `rmdir` — it has `holder.txt` inside); >1h old = stale. Full protocol
+and rationale: `docs/05-multi-agent.md`.
 
 ---
 

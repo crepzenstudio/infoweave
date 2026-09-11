@@ -37,7 +37,7 @@ Report: number of files checked, number of issues found, list any violations.
 
 ## 5. Stale locks
 
-- Are there files in `memory/locks/` older than 1 hour? Report them as stale and offer to remove.
+- Are there lock directories in `memory/locks/` older than 1 hour? Report them as stale and offer to remove (the whole directory, not just `holder.txt`).
 
 ## 6. Summary report
 

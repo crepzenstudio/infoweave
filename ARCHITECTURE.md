@@ -80,8 +80,10 @@ Multiple agents on multiple machines are expected. Safety comes from file discip
   (one file per machine), creating new files in `handoffs/`, appending to
   `memory/decisions.md`, and reading anything.
 - **Lock required:** editing shared single-owner files such as `knowledge/INDEX.md`
-  or any category INDEX. An agent drops a marker in `memory/locks/<resource>.lock`
-  first, then edits, then removes it. Locks older than ~1 hour are treated as stale.
+  or any category INDEX. An agent `mkdir`s `memory/locks/<resource>/` first (atomic —
+  this is the lock itself, not a plain file you'd need to re-check for a race), writes
+  a `holder.txt` marker inside, edits, then removes the directory. Locks older than
+  ~1 hour are treated as stale. Details: `docs/05-multi-agent.md`.
 - **Single-session only:** editing the rulebook (`AGENTS.md`) and `_system/*`.
 
 Because journals are append-only and handoffs are new-file-only, two agents writing
